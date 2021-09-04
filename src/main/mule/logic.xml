@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http-policy-transform="http://www.mulesoft.org/schema/mule/http-policy-transform"
+	xmlns:tls="http://www.mulesoft.org/schema/mule/tls" xmlns:module-logger="http://www.mulesoft.org/schema/mule/module-logger"
+	xmlns:java="http://www.mulesoft.org/schema/mule/java" xmlns:db="http://www.mulesoft.org/schema/mule/db"
+	xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:MEPPI="http://www.meppi.org/schema/auth" xmlns:min-log="http://www.mulesoft.org/schema/mule/min-log" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+	http://www.mulesoft.org/schema/mule/min-log http://www.mulesoft.org/schema/mule/min-log/current/mule-min-log.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd
+http://www.mulesoft.org/schema/mule/db http://www.mulesoft.org/schema/mule/db/current/mule-db.xsd
+http://www.mulesoft.org/schema/mule/module-logger http://www.mulesoft.org/schema/mule/module-logger/current/mule-module-logger.xsd
+http://www.mulesoft.org/schema/mule/tls http://www.mulesoft.org/schema/mule/tls/current/mule-tls.xsd
+http://www.mulesoft.org/schema/mule/http-policy-transform http://www.mulesoft.org/schema/mule/http-policy-transform/current/mule-http-policy-transform.xsd">
+	
+	<module-logger:config name="Logger_Mule_Extension_Config" doc:name="Logger Mule Extension Config" doc:id="4b8ee40e-62d0-40df-8198-b9afe9581306" appVersion="#[Mule::p('app.version')]" />
+	<http:request-config name="HTTP_Request_configuration" doc:name="HTTP Request configuration" doc:id="658d4c7a-8e40-43de-9937-b3b01c600f9d" >
+		<http:request-connection protocol="HTTPS" host="dev-7197021.okta.com" >
+			<tls:context >
+				<tls:trust-store insecure="true" />
+			</tls:context>
+		</http:request-connection>
+	</http:request-config>
+	<flow name="put:\ping">
+		<module-logger:log doc:name="Log - Start" doc:id="dae26f80-d566-446e-8c52-e65104d337db" config-ref="Logger_Mule_Extension_Config" callsite="put:\ping" host="#[server.host]" index="skeleton-api-template" actionType="Update Ping" mdlc="test" message="Updating the ping resource" content="#[payload]"/>
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+				xsi:schemaLocation="http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+				<ee:message>
+				<ee:set-payload resource="dw/put-response.dwl" />
+				</ee:message>
+			</ee:transform>
+		<set-variable value="200" doc:name="Set Variable" doc:id="c3a1ad01-a27a-40fb-addb-9f04adfb6152" variableName="httpStatus"/>
+		<module-logger:log doc:name="Log - End" doc:id="9ffc5e16-c288-41be-a86c-29a20235dd19" config-ref="Logger_Mule_Extension_Config" callsite="put:\ping" host="#[server.host]" index="skeleton-api-template" actionType="Update ping" mdlc="test" message="Updated the ping resource succesfully" content="#[payload]"/>
+	</flow>
+	<flow name="get:\ping">
+		<module-logger:log doc:name="Log - Start" doc:id="80642296-a7fa-4e2c-9b2d-0826bcaacb20" config-ref="Logger_Mule_Extension_Config" callsite="get:\ping" host="#[server.host]" index="skeleton-api-template" actionType="GET ping resource" mdlc="test" message="Getting the ping resource" content="#[payload]"/>
+		<logger level="INFO" doc:name="Logger" doc:id="9f2d5f09-e416-4ede-a3cb-89604c6bcc61" message="Getting the ping resource through a Logger default"/>
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+				xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd"
+				doc:id="c6abbe8f-fe95-4251-acff-8e00853dd895">
+				<ee:message>
+					<ee:set-payload resource="dw/get-response.dwl" />
+				</ee:message>
+			</ee:transform>
+		<set-variable value="200" doc:name="Set Variable" doc:id="99ab730e-9ab0-4839-9b49-f4aa2c0f5fa1" variableName="httpStatus"/>
+		<module-logger:log doc:name="Log - End" doc:id="265e4c46-4f5b-4b41-ad2b-f6b8d309b733" config-ref="Logger_Mule_Extension_Config" callsite="get:\ping" host="#[server.host]" index="test" actionType="GET ping" mdlc="test" message="Retrieved ping resource successfully" content="#[payload]"/>
+	</flow>
+
+	<flow name="get:\health-check" doc:id="75557ffa-ce23-4308-aa57-8c3e9a56170f" >
+		<module-logger:log doc:name="Log" doc:id="61141af5-0aa5-4262-bc23-7f5ec3658424" config-ref="Logger_Mule_Extension_Config" callsite="get:\health-check" host="#[server.host]" index="health-check" actionType="GET health check of skeleton" mdlc="test" message="Before Health check of skeleton api" content="#[payload]"/>
+		<ee:transform xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+            <ee:message>
+                <ee:set-payload><![CDATA[%dw 2.0
+output application/json
+---
+{"status":"200","message":"Alive"}]]></ee:set-payload>
+            </ee:message>
+        </ee:transform>
+        
+		<flow-ref doc:name="Flow Reference" doc:id="e2bebba0-ccad-400b-8e68-b60965eb7866" name="get:\ping"/>
+		<module-logger:log doc:name="Log - End" doc:id="607d66c9-15f7-487f-8388-fef670d206a1" config-ref="Logger_Mule_Extension_Config" callsite="get:\health-check" host="#[server.host]" index="test" actionType="GET health check" mdlc="test" message="Health check is successfull" content="#[payload]"/>
+	</flow>
+
+</mule>

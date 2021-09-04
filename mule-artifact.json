@@ -1,0 +1,29 @@
+{
+  "configs": [
+    "router.xml",
+    "errors.xml",
+    "config.xml",
+    "logic.xml"
+  ],
+  "secureProperties": [],
+  "redeploymentEnabled": true,
+  "name": "skeleton-api-template",
+  "minMuleVersion": "4.3.0",
+  "requiredProduct": "MULE_EE",
+  "classLoaderModelLoaderDescriptor": {
+    "id": "mule",
+    "attributes": {
+      "exportedResources": [
+        "api/.gitignore",
+        "api/skeleton-sh-api.raml",
+        "api/examples/ping/get-response-example.json",
+        "api/examples/ping/put-request-example.json",
+        "api/examples/ping/put-response-example.json"
+      ]
+    }
+  },
+  "bundleDescriptorLoader": {
+    "id": "mule",
+    "attributes": {}
+  }
+}

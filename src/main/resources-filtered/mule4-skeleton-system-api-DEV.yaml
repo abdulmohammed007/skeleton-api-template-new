@@ -1,0 +1,10 @@
+#proxy configuration elements for local environment
+api:
+  id: "12983275"
+  base: "${project.artifactId}"
+  version: "v1"
+  port: "9185"
+
+my:
+  client-id: "xx"
+  client-secret: "xx"

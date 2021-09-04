@@ -1,0 +1,19 @@
+#%RAML 1.0 ResourceType
+
+usage: Use this resource to add a health check to your API, you should always use the /healthcheck path in the root of your API
+description: performs an health check and returns status
+get?:
+  responses: 
+    200:
+      description: API is healthy and working normally
+      body:
+        application/json:
+          type: !include ../datatypes/health-check-dataType.raml
+          example: !include ../examples/health-check-example.raml
+            
+    500:
+      description: There is an issue with the API or a downstream system
+      body: 
+        application/json:
+          type: !include ../datatypes/health-check-dataType.raml
+          example: !include ../examples/health-check-error-example.raml

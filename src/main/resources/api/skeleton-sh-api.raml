@@ -1,0 +1,58 @@
+#%RAML 1.0
+baseUri: https://anypoint.mulesoft.com/mocking/api/v1/links/5b796e95-4327-41d5-851f-1915d5a62f51/ # 
+title: Skeleton SH API
+
+version: v1
+
+uses:
+  ramlLib: /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/sh-raml-library.raml
+
+
+types:
+  get-response-type: !include datatypes/get-response-dataType.raml
+  put-request-type: !include datatypes/put-request-dataType.raml
+  put-response-type: !include datatypes/put-response-dataType.raml
+  error-data-type: !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/datatypes/error-dataType.raml
+  
+/health-check:
+  type:
+    ramlLib.health-check:
+  get:
+    
+/ping:
+  type:
+    ramlLib.common-resource-types:
+      getResponseType: get-response-type
+      putRequestType: put-request-type
+      putResponseType: put-response-type
+      errorResponseType: error-data-type
+      getResponseExample: !include examples/ping/get-response-example.raml
+      putRequestExample: !include examples/ping/put-request-example.raml
+      putResponseExample: !include examples/ping/put-response-example.raml
+      errorResponseExample200:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-200-example.raml
+      errorResponseExample400:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-400-example.raml
+      errorResponseExample401:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-401-example.raml
+      errorResponseExample403:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-403-example.raml
+      errorResponseExample404:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-404-example.raml
+      errorResponseExample405:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-405-example.raml
+      errorResponseExample406:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-406-example.raml
+      errorResponseExample415:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-415-example.raml
+      errorResponseExample500:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-500-example.raml
+      errorResponseExample501:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-501-example.raml
+      errorResponseExample502:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-502-example.raml
+      errorResponseExample503:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-503-example.raml
+      errorResponseExample504:  !include /exchange_modules/6ee10956-fd4c-4000-99a7-369e5fcf4a39/sh-raml-library/1.0.0/examples/api-error-504-example.raml
+
+      
+      
+  get:
+    description: Return a standard response.
+    is: [ramlLib.client-credentials-headers-trait] 
+    
+  put:
+    description: Return a standard response
+    is: [ramlLib.client-credentials-headers-trait,ramlLib.accept-trait,ramlLib.content-type-trait]
+  
+                
+    
+  

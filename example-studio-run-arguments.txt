@@ -1,0 +1,3 @@
+-M-XX:-UseBiasedLocking
+-Danypoint.platform.gatekeeper=disabled
+-Dmule.env=dev

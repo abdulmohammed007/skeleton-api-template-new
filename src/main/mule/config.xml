@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:secure-properties="http://www.mulesoft.org/schema/mule/secure-properties"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd 
+http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/secure-properties http://www.mulesoft.org/schema/mule/secure-properties/current/mule-secure-properties.xsd">
+
+	<configuration doc:name="Configuration"
+		doc:id="3333a62f-d60d-4a06-a1a7-b7fa9a4c4fd3"
+		defaultErrorHandler-ref="apikit-errors" />
+
+
+	<apikit:config name="skeleton-api-config"
+		api="skeleton-sh-api.raml" outboundHeadersMapName="outboundHeaders"
+		httpStatusVarName="httpStatus" />
+
+	<http:listener-config
+		name="skeleton-api-httpListenerConfig"
+		doc:description="This is not used if a shared domain is configured in the listener..in that case remove this config to prevent this port from showing in the server's port scan."
+		doc:name="HTTP Listener config">
+		<http:listener-connection host="0.0.0.0"
+			port="${http.port}" />
+	</http:listener-config>
+
+	<!-- secure-properties:config name="Deployment_Specific_Properties" doc:name="Secure 
+		Properties Config" file="mule4-skeleton-system-api-${mule.env}.yaml" key="${mule.key}" 
+		doc:description="Deployment specific properties file which supports encryption 
+		of sensitive properties, like passwords, user ids, etc. This deployment environment 
+		sensitive...meaning that each deployment environment (DEV, TEST, PROD for 
+		instance) has it's own property file. These can be either .property files 
+		or .yaml files. The recommended approach is to use a YAML configuration files, 
+		because it allows the addition of type validations and autocompletion. Both 
+		encrypted and non-encrypted values can be used anywhere in the Mule app. 
+		Encrypted values should be defined between the sequence ![value]. Note that 
+		you have to use the secure:: prefix to access all values inside a secure 
+		properties file, even if the values are non-encrypted. You can define more 
+		than one secure configuration properties file to read properties from. Simply 
+		define a &lt;secure-properties:config /&gt; tag for each file you want to 
+		load. Each secure configuration properties file is independent from the others." 
+		/ -->
+	<global-property doc:name="Global Property"
+		doc:id="ad41277c-aede-46de-bd6c-b8835146fca1" name="mule.env"
+		value="dev" />
+	<configuration-properties
+		doc:name="Configuration properties"
+		doc:id="cc912847-aa85-441e-8ba2-9da7dc419e39"
+		file="config/api-config-${mule.env}.yaml" />
+	<api-gateway:autodiscovery apiId="${api.id}" ignoreBasePath="true" doc:name="API Autodiscovery" doc:id="188d020d-b0ad-4b43-9b90-070be7176e62" flowRef="skeleton-api-template-main" />
+
+</mule>

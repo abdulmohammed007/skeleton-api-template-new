@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mule xmlns:json-logger="http://www.mulesoft.org/schema/mule/json-logger"
+	xmlns:module-basic-auth-connector="http://www.mulesoft.org/schema/mule/module-basic-auth-connector"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:api-gateway="http://www.mulesoft.org/schema/mule/api-gateway"
+	xmlns:apikit="http://www.mulesoft.org/schema/mule/mule-apikit"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:error-handler-plugin="http://www.mulesoft.org/schema/mule/error-handler-plugin"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns:min-log="http://www.mulesoft.org/schema/mule/min-log"
+	xmlns:MEPPI="http://www.meppi.org/schema/auth"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd   http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd   http://www.mulesoft.org/schema/mule/mule-apikit http://www.mulesoft.org/schema/mule/mule-apikit/current/mule-apikit.xsd      http://www.mulesoft.org/schema/mule/api-gateway http://www.mulesoft.org/schema/mule/api-gateway/current/mule-api-gateway.xsd  http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd      http://www.mulesoft.org/schema/mule/min-log http://www.mulesoft.org/schema/mule/min-log/current/mule-min-log.xsd http://www.mulesoft.org/schema/mule/error-handler-plugin http://www.mulesoft.org/schema/mule/error-handler-plugin/current/mule-error-handler-plugin.xsd
+http://www.mulesoft.org/schema/mule/module-basic-auth-connector http://www.mulesoft.org/schema/mule/module-basic-auth-connector/current/mule-module-basic-auth-connector.xsd
+http://www.meppi.org/schema/auth http://www.meppi.org/schema/auth.xsd
+http://www.mulesoft.org/schema/mule/json-logger http://www.mulesoft.org/schema/mule/json-logger/current/mule-json-logger.xsd">
+	<flow name="skeleton-api-template-main">
+		<http:listener path="/${api.base}/${api.version}/*"
+			doc:name="Listener" config-ref="skeleton-api-httpListenerConfig">
+			<http:response
+				statusCode="#[vars.httpStatus default 200]"
+				reasonPhrase="#[vars.reasonPhrase]">
+				<http:headers>#[vars.outboundHeaders default {}]</http:headers>
+			</http:response>
+			<http:error-response
+				statusCode="#[vars.httpStatus default 500]"
+				reasonPhrase="#[vars.httpReason]">
+				<http:body>#[payload]</http:body>
+			</http:error-response>
+		</http:listener>
+		
+		<apikit:router doc:name="APIkit Router"
+			config-ref="skeleton-api-config" />
+	</flow>
+	<flow name="skeleton-sys-api-console">
+		<http:listener path="/console/*" doc:name="Listener"
+			config-ref="skeleton-api-httpListenerConfig">
+			<http:response
+				statusCode="#[vars.httpStatus default 200]"
+				reasonPhrase="#[vars.reasonPhrase]">
+				<http:headers>#[vars.outboundHeaders default {}]</http:headers>
+			</http:response>
+			<http:error-response
+				statusCode="#[vars.httpStatus default 500]"
+				reasonPhrase="#[vars.httpReason]">
+				<http:body>#[payload]</http:body>
+			</http:error-response>
+		</http:listener>
+		<apikit:console config-ref="skeleton-api-config" />
+	</flow>
+	<flow name="put:\ping:application\json:skeleton-sys-api-config">
+		<flow-ref doc:name="put:\ping" doc:id="12fc588d-3c4c-425c-919b-10ac06b4e9d5" name="put:\ping" />
+	</flow>
+	<flow name="get:\ping:skeleton-sys-api-config">
+		<flow-ref doc:name="get:\ping" doc:id="bcab8c8e-cb84-4389-b7e9-856f0ac99b08" name="get:\ping" />
+	</flow>
+	<flow name="get:\health-check:skeleton-sys-api-config">
+        <flow-ref doc:name="get:\health-check" doc:id="c7ad6c13-a0db-4e39-a07f-ba8acea15385" name="get:\health-check"/>
+    </flow>
+</mule>

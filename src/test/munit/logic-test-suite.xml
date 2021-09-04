@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:munit="http://www.mulesoft.org/schema/mule/munit"
+	xmlns:munit-tools="http://www.mulesoft.org/schema/mule/munit-tools" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:MEPPI="http://www.meppi.org/schema/auth"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xsi:schemaLocation="
+		http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+		http://www.meppi.org/schema/auth http://www.meppi.org/schema/auth.xsd
+		http://www.mulesoft.org/schema/mule/munit http://www.mulesoft.org/schema/mule/munit/current/mule-munit.xsd
+		http://www.mulesoft.org/schema/mule/munit-tools  http://www.mulesoft.org/schema/mule/munit-tools/current/mule-munit-tools.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<munit:config name="logic-test-suite.xml" />
+	<munit:test name="logic-test-suite-put:\pingTest" doc:id="c944881d-4028-4fc4-b5b7-40242db96637" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to put:\ping" doc:id="b6cdd7c8-6df1-4964-b84e-f947136a9419" name="put:\ping"/>
+		</munit:execution>
+		<munit:validation>
+			<ee:transform doc:name="Transform Message" doc:id="4b8b2577-b5eb-44ee-8d3f-e3273757478c" >
+				<ee:message >
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable resource="dw/get-validation.dwl" variableName="expected" /> 
+				</ee:variables>
+			</ee:transform>
+			<munit-tools:assert-that doc:name="Assert Response Not NULL" doc:id="29997d4f-d7ed-429f-b8e4-006c085b3687" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+			<munit-tools:assert-that doc:name="Assert Response Expected" doc:id="d19a1cce-0ba1-4c59-96c4-784b2f11832e" expression="#[payload]" is="#[MunitTools::equalTo(vars.expected)]" message="The payload is not correct"/>
+			<munit-tools:assert-that doc:name="Assert HTTP Status Expected" doc:id="095a1cbb-59d3-4c5c-b582-15b234409973" expression="#[vars.httpStatus]" is="#[MunitTools::equalTo('200')]" message="#['Invalid HTTP Status code']"/>
+		</munit:validation>
+	</munit:test>
+	<munit:test name="logic-test-suite-get:\pingTest" doc:id="99fcd07b-bf25-4dac-a803-a992113491fc" description="Test">
+		<munit:execution >
+			<flow-ref doc:name="Flow-ref to get:\ping" doc:id="3e24412a-645b-4c21-8cc9-6c2f020f0542" name="get:\ping"/>
+		</munit:execution>
+		<munit:validation >
+			<ee:transform doc:name="Transform Message" doc:id="ef6d241a-72c4-4922-a7fe-b33fec9bcf19" >
+				<ee:message >
+				</ee:message>
+				<ee:variables >
+					<ee:set-variable resource="dw/put-validation.dwl" variableName="expected" />
+				</ee:variables>
+			</ee:transform>
+			<munit-tools:assert-that doc:name="Assert Response Not NULL" doc:id="26bd841e-8e98-48fa-b702-f9b3f640b645" expression="#[payload]" is="#[MunitTools::notNullValue()]"/>
+			<munit-tools:assert-that doc:name="Assert Response Expected" doc:id="bfb4fcbb-37b1-4603-abd1-439fc22c2a3a" expression="#[payload]" is="#[MunitTools::equalTo(vars.expected)]" message="The payload is not correct"/>
+			<munit-tools:assert-that doc:name="Assert HTTP Status Expected" doc:id="a8efdb47-fc5d-40f9-b60f-8d9b4d402e28" expression="#[vars.httpStatus]" is="#[MunitTools::equalTo('200')]" message="#['Invalid HTTP Status code']"/>
+		</munit:validation>
+	</munit:test>
+	
+
+</mule>

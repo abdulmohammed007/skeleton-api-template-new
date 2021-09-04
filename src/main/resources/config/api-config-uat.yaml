@@ -1,0 +1,23 @@
+http.port: "8081"
+
+api.base: "api"
+api.version: "v1"
+api.id: "16462840"
+
+#### Vault API Config ########
+vault.api.host: ""
+vault.api.port: ""
+
+anypoint.platform.client_id: "change_me"
+anypoint.platform.client_secret: "change_me"
+
+
+#Basic Auth config
+basic.auth.username: "integrationuser"
+basic.auth.password: "Admin@1234" 
+
+#Logger config
+app.version: "1.0.0"
+app.name: "skeleton-api-template"
+
+  

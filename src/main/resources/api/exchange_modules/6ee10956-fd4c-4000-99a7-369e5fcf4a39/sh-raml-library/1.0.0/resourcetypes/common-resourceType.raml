@@ -1,0 +1,520 @@
+#%RAML 1.0 ResourceType 
+usage: Use this to describe resource that list a single item 
+description: A particular <<resourcePathName | !singularize>>. You can also carry out patch or delete operation on a paritcular item
+get?:
+  responses:
+    500:
+      description: | 
+          An Internal Server Error has occurred. 
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample500>> 
+    501:
+      description: | 
+          API Not Implemented
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample501>> 
+    502:
+      description: |
+          Bad Gateway. 
+          Problem communicating with or an error has been returned from a downstream endpoint.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample502>>
+    503:
+      description: | 
+          Service Unavailable
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample503>> 
+    504:
+      description: |
+          Gateway Timeout.
+          Timeout communicating with a downstream endpoint 
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample504>>
+    415:
+      description: |
+          Unsupported Media Type
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample415>>
+    406:
+      description: |
+          Not Acceptable
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample406>>
+    405:
+      description: |
+          Method not allowed
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample405>>
+    404:
+      description: |
+          The URI requested is invalid or the resource requested does not exist.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample404>>
+    403:
+      description: |
+          The request is understood, but it has been refused or access is not allowed.  
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>    
+          example: <<errorResponseExample403>>   
+    401:
+      description: |
+          Requestor is not authorised to perform this action.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample401>>
+    400:
+      description: |
+          Request is invalid.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample400>>
+    200:
+      description: |
+          Successfully retrieved a <<resourcePathName | !singularize>>. 
+      body:
+        application/json:          
+          example: <<getResponseExample>>
+          type: <<getResponseType>>
+patch?:
+  body:
+    application/json:
+      type: <<resourcePathName | !singularize>>
+      example: <<patchRequestType>>
+  responses:
+    500:
+      description: | 
+          An Internal Server Error has occurred. 
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample500>> 
+    501:
+      description: | 
+          API Not Implemented
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample501>> 
+    502:
+      description: |
+          Bad Gateway. 
+          Problem communicating with or an error has been returned from a downstream endpoint.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample502>>
+    503:
+      description: | 
+          Service Unavailable
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample503>> 
+    504:
+      description: |
+          Gateway Timeout.
+          Timeout communicating with a downstream endpoint 
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample504>>
+    415:
+      description: |
+          Unsupported Media Type
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample415>>
+    406:
+      description: |
+          Not Acceptable
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample406>>
+    405:
+      description: |
+          Method not allowed
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample405>>
+    404:
+      description: |
+          The URI requested is invalid or the resource requested does not exist.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample404>>
+    403:
+      description: |
+          The request is understood, but it has been refused or access is not allowed.  
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>    
+          example: <<errorResponseExample403>>   
+    401:
+      description: |
+          Requestor is not authorised to perform this action.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample401>>
+    400:
+      description: |
+          Request is invalid.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample400>>
+    204:
+      description: |
+          No Content
+delete?:
+  
+  responses:
+    500:
+      description: | 
+          An Internal Server Error has occurred. 
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample500>> 
+    501:
+      description: | 
+          API Not Implemented
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample501>> 
+    502:
+      description: |
+          Bad Gateway. 
+          Problem communicating with or an error has been returned from a downstream endpoint.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample502>>
+    503:
+      description: | 
+          Service Unavailable
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample503>> 
+    504:
+      description: |
+          Gateway Timeout.
+          Timeout communicating with a downstream endpoint 
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample504>>
+    415:
+      description: |
+          Unsupported Media Type
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample415>>
+    406:
+      description: |
+          Not Acceptable
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample406>>
+    405:
+      description: |
+          Method not allowed
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample405>>
+    404:
+      description: |
+          The URI requested is invalid or the resource requested does not exist.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample404>>
+    403:
+      description: |
+          The request is understood, but it has been refused or access is not allowed.  
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>    
+          example: <<errorResponseExample403>>   
+    401:
+      description: |
+          Requestor is not authorised to perform this action.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample401>>
+    400:
+      description: |
+          Request is invalid.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample400>>
+    204:
+      description: |
+          No Content
+      
+      
+post?:
+  body:
+    application/json:
+      example: <<postRequestExample>>
+      type: <<postRequestType>>
+  responses:
+    201:
+      headers: 
+        location:
+          type: string
+          example: <<locationHeaderExample>>
+      body: 
+        application/json:
+          example: <<postResponseExample>>
+          type: <<postResponseType>>
+    500:
+      description: | 
+          An Internal Server Error has occurred. 
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample500>> 
+    501:
+      description: | 
+          API Not Implemented
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample501>> 
+    502:
+      description: |
+          Bad Gateway. 
+          Problem communicating with or an error has been returned from a downstream endpoint.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample502>>
+    503:
+      description: | 
+          Service Unavailable
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample503>> 
+    504:
+      description: |
+          Gateway Timeout.
+          Timeout communicating with a downstream endpoint 
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample504>>
+    415:
+      description: |
+          Unsupported Media Type
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample415>>
+    406:
+      description: |
+          Not Acceptable
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample406>>
+    405:
+      description: |
+          Method not allowed
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample405>>
+    404:
+      description: |
+          The URI requested is invalid or the resource requested does not exist.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample404>>
+    403:
+      description: |
+          The request is understood, but it has been refused or access is not allowed.  
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>    
+          example: <<errorResponseExample403>>   
+    401:
+      description: |
+          Requestor is not authorised to perform this action.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample401>>
+    400:
+      description: |
+          Request is invalid.
+          Refer to the accompanying error message for further details.
+      body:
+        application/json:
+          type: <<errorResponseType>>
+          example: <<errorResponseExample400>>
+    
+
+put?:
+    body:
+      application/json:
+        type: <<putRequestType>> 
+        example: <<putRequestExample>>
+    responses: 
+      200:
+        description: |
+            OK
+        body:
+          application/json:            
+            example: <<putResponseExample>>
+            type: <<putResponseType>>
+      500:
+        description: | 
+            An Internal Server Error has occurred. 
+            Refer to the accompanying error message for further details.
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample500>> 
+      501:
+        description: | 
+            API Not Implemented
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample501>> 
+      502:
+        description: |
+            Bad Gateway. 
+            Problem communicating with or an error has been returned from a downstream endpoint.
+            Refer to the accompanying error message for further details.
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample502>>
+      503:
+        description: | 
+            Service Unavailable
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample503>> 
+      504:
+        description: |
+            Gateway Timeout.
+            Timeout communicating with a downstream endpoint 
+            Refer to the accompanying error message for further details.
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample504>>
+      415:
+        description: |
+            Unsupported Media Type
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample415>>
+      406:
+        description: |
+            Not Acceptable
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample406>>
+      405:
+        description: |
+            Method not allowed
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample405>>
+      404:
+        description: |
+            The URI requested is invalid or the resource requested does not exist.
+            Refer to the accompanying error message for further details.
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample404>>
+      403:
+        description: |
+            The request is understood, but it has been refused or access is not allowed.  
+            Refer to the accompanying error message for further details.
+        body:
+          application/json:
+            type: <<errorResponseType>>    
+            example: <<errorResponseExample403>>   
+      401:
+        description: |
+            Requestor is not authorised to perform this action.
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample401>>
+      400:
+        description: |
+            Request is invalid.
+            Refer to the accompanying error message for further details.
+        body:
+          application/json:
+            type: <<errorResponseType>>
+            example: <<errorResponseExample400>>
+    

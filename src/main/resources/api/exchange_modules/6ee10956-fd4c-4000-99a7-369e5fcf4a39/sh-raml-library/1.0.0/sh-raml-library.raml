@@ -1,0 +1,24 @@
+#%RAML 1.0 Library
+usage:
+
+securitySchemes:
+  basi-auth: !include securityschemes/basic-authentication-securityScheme.raml
+
+traits:
+  client-credentials-trait: !include traits/client-credentials-trait.raml
+  client-credentials-headers-trait: !include traits/client-credentials-headers-trait.raml
+  transaction-id-trait: !include traits/transaction-id-trait.raml
+  accept-trait: !include traits/accept-trait.raml
+  allow-cors-trait: !include traits/allow-cors-trait.raml
+  authorization-trait: !include traits/authorization-trait.raml
+  content-type-trait: !include traits/content-type-trait.raml
+  countable-trait: !include traits/countable-trait.raml
+  pageable-trait: !include traits/pageable-trait.raml
+    
+types:
+  ping-datatype: !include datatypes/ping-dataType.raml
+  transaction-id-type: !include datatypes/transaction-id-dataType.raml
+
+resourceTypes:
+  common-resource-types: !include resourcetypes/common-resourceType.raml
+  health-check: !include resourcetypes/health-check-resourceType.raml
