@@ -5,13 +5,13 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>6ee10956-fd4c-4000-99a7-369e5fcf4a39</groupId>
-	<artifactId>skeleton-api-template</artifactId>
+	<artifactId>skeleton-api-template-new</artifactId>
 	<version>1.0.9</version>
 	<packaging>mule-application</packaging>
 
 	<name>skeleton-api-template</name>
 
-	<description>The skeleton api template is a starting point for building APIss in Mule 4.3 for Select Health inc,.</description>
+	<description>The skeleton api template is a starting point for building APIs in Mule 4.3 for Select Health</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -42,6 +42,7 @@
 						<environment>${environment}</environment>
 						<provider>${provider}</provider>
 						<replicas>1</replicas>
+						<deploymentTimeout>5000000</deploymentTimeout>
 						<properties>
 							<mule.env>${mule.env}</mule.env>
 							<logging.level.logger-mule-extension>${logging.level.logger-mule-extension}</logging.level.logger-mule-extension>
@@ -73,12 +74,7 @@
 						</deploymentSettings>
 
 					</runtimeFabricDeployment>
-					<sharedLibraries>
-						<sharedLibrary>
-							<groupId>mysql</groupId>
-							<artifactId>mysql-connector-java</artifactId>
-						</sharedLibrary>
-					</sharedLibraries>
+
 				</configuration>
 			</plugin>
 
@@ -169,41 +165,15 @@
 			<version>${munit.version}</version>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-			<groupId>org.mule.connectors</groupId>
-			<artifactId>mule-db-connector</artifactId>
-			<version>1.8.0</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.mule.module</groupId>
-			<artifactId>mule-java-module</artifactId>
-			<version>1.2.6</version>
-			<classifier>mule-plugin</classifier>
-		</dependency>
+
 		<dependency>
 			<groupId>6ee10956-fd4c-4000-99a7-369e5fcf4a39</groupId>
 			<artifactId>logger-mule-extension</artifactId>
 			<version>1.0.3</version>
 			<classifier>mule-plugin</classifier>
 		</dependency>
-		<dependency>
-			<groupId>com.mulesoft.anypoint</groupId>
-			<artifactId>mule-http-policy-transform-extension</artifactId>
-			<version>${http.policy.transform.version}</version>
-			<classifier>mule-plugin</classifier>
-			<exclusions>
-				<exclusion>
-					<groupId>org.mule.connectors</groupId>
-					<artifactId>mule-http-connector</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-			<version>5.1.6</version>
-		</dependency>
+
+
 	</dependencies>
 
 	<repositories>
