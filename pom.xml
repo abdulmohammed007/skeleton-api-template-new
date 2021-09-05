@@ -6,7 +6,7 @@
 
 	<groupId>6ee10956-fd4c-4000-99a7-369e5fcf4a39</groupId>
 	<artifactId>skeleton-api-template</artifactId>
-	<version>1.0.8</version>
+	<version>1.0.9</version>
 	<packaging>mule-application</packaging>
 
 	<name>skeleton-api-template</name>
