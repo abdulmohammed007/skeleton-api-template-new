@@ -11,7 +11,7 @@
 
 	<name>skeleton-api-template</name>
 
-	<description>The skeleton api template is a starting point for building APIs in Mule 4.3 for Select Health inc.</description>
+	<description>The skeleton api template is a starting point for building APIs in Mule 4.3 for Select Health inc,.</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
